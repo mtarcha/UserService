@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 
 namespace UserService.Domain.Common
 {
-    public interface IEvent<TKey>
+    public interface IEvent<out TKey>
     {
-        TKey AggregatorId { get; set; }
+        TKey AggregatorId { get; }
 
-        DateTime Timestamp { get; set; }
+        DateTime Timestamp { get; }
     }
 }
