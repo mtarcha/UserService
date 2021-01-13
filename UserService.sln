@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService.Api", "src\UserService.Api\UserService.Api.csproj", "{720717F0-9E73-48CD-8447-D7445775BBB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Domain.Common", "src\UserService.Domain.Common\UserService.Domain.Common.csproj", "{46447C86-C093-4956-83AB-E6792C0F26DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{720717F0-9E73-48CD-8447-D7445775BBB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{720717F0-9E73-48CD-8447-D7445775BBB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{720717F0-9E73-48CD-8447-D7445775BBB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{720717F0-9E73-48CD-8447-D7445775BBB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46447C86-C093-4956-83AB-E6792C0F26DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46447C86-C093-4956-83AB-E6792C0F26DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46447C86-C093-4956-83AB-E6792C0F26DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46447C86-C093-4956-83AB-E6792C0F26DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EA80EFE3-BF85-406A-B919-6570C26CFB45}
+	EndGlobalSection
+EndGlobal
