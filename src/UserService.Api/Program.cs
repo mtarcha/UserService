@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using UserService.Api.Services;
 
 namespace UserService.Api
 {
@@ -13,7 +16,11 @@ namespace UserService.Api
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+
+            RunSeed(host).Wait();
+
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -22,5 +29,18 @@ namespace UserService.Api
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        private static async Task RunSeed(IHost host)
+        {
+            var scopeFactory = host.Services.GetService<IServiceScopeFactory>();
+            using (var scope = scopeFactory.CreateScope())
+            {
+                var seeders = scope.ServiceProvider.GetServices<IStorageSeeder>();
+                foreach (var storageSeeder in seeders)
+                {
+                    await storageSeeder.SeedAsync(CancellationToken.None);
+                }
+            }
+        }
     }
 }
