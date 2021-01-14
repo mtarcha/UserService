@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+  userservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "6666:80"
+      - "7777:443"
