@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Application", "
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{83F6FA31-C1B7-4090-B43A-5677C2C5F3B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Infrastructure.Sql", "src\UserService.Infrastructure.Sql\UserService.Infrastructure.Sql.csproj", "{561E2E4E-014D-4A65-A8BC-8841CA7898BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{83F6FA31-C1B7-4090-B43A-5677C2C5F3B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83F6FA31-C1B7-4090-B43A-5677C2C5F3B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83F6FA31-C1B7-4090-B43A-5677C2C5F3B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{561E2E4E-014D-4A65-A8BC-8841CA7898BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{561E2E4E-014D-4A65-A8BC-8841CA7898BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{561E2E4E-014D-4A65-A8BC-8841CA7898BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{561E2E4E-014D-4A65-A8BC-8841CA7898BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

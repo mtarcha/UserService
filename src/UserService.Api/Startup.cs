@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using UserService.Api.Services;
 using UserService.Application.Queries;
+using UserService.Domain.Repositories;
+using UserService.Infrastructure.Sql;
 
 namespace UserService.Api
 {
@@ -29,6 +25,14 @@ namespace UserService.Api
         {
             services.AddScoped<IStorageSeeder, StorageSeeder>();
             services.AddControllers();
+
+            var connectionString = Configuration.GetConnectionString("UserSqlDbConnectionString");
+            services.AddDbContext<UserServiceDbContext>(cfg =>
+            {
+                cfg.UseSqlServer(connectionString);
+            });
+
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddMediatR(typeof(GetUsersByEmailQuery));
         }

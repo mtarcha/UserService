@@ -7,3 +7,10 @@ services:
     ports:
       - "6666:80"
       - "7777:443"
+  sql:
+    image: microsoft/mssql-server-linux:latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=123asdQ!
+    ports:
+      - "5433:1433"  

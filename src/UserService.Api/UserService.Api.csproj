@@ -22,6 +22,7 @@
     <ProjectReference Include="..\UserService.Application\UserService.Application.csproj" />
     <ProjectReference Include="..\UserService.Domain.Common\UserService.Domain.Common.csproj" />
     <ProjectReference Include="..\UserService.Domain\UserService.Domain.csproj" />
+    <ProjectReference Include="..\UserService.Infrastructure.Sql\UserService.Infrastructure.Sql.csproj" />
   </ItemGroup>
 
 
