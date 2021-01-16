@@ -3,15 +3,11 @@ using UserService.Domain.Common;
 
 namespace UserService.Domain.Events
 {
-    public class UserEmailVerifiedEvent : IEvent<Guid>
+    public class UserEmailVerifiedEvent : Event
     {
         public UserEmailVerifiedEvent(Guid aggregatorId)
+            : base(aggregatorId)
         {
-            AggregatorId = aggregatorId;
-            Timestamp = DateTime.UtcNow;
         }
-
-        public Guid AggregatorId { get; }
-        public DateTime Timestamp { get; }
     }
 }

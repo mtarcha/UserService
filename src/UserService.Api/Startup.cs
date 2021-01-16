@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using UserService.Api.Services;
 using UserService.Application.Queries;
 using UserService.Domain.Repositories;
+using UserService.Infrastructure.Mongo;
 using UserService.Infrastructure.Sql;
 
 namespace UserService.Api
@@ -31,6 +32,8 @@ namespace UserService.Api
             {
                 cfg.UseSqlServer(connectionString);
             });
+
+            services.AddMongoDbEventStore(Configuration);
 
             services.AddScoped<IUserRepository, UserRepository>();
 

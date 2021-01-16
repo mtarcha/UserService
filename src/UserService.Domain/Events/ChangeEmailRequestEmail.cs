@@ -3,17 +3,14 @@ using UserService.Domain.Common;
 
 namespace UserService.Domain.Events
 {
-    public class ChangeEmailRequestEmail : IEvent<Guid>
+    public class ChangeEmailRequestEmail : Event
     {
-        public ChangeEmailRequestEmail(Guid aggregatorId, string newEmail)
+        public ChangeEmailRequestEmail(Guid aggregatorId, string newEmail) 
+            : base(aggregatorId)
         {
-            AggregatorId = aggregatorId;
             NewEmail = newEmail;
-            Timestamp = DateTime.UtcNow;
         }
 
-        public Guid AggregatorId { get; }
-        public DateTime Timestamp { get; }
-        public string NewEmail { get; set; }
+        public string NewEmail { get; private set; }
     }
 }
