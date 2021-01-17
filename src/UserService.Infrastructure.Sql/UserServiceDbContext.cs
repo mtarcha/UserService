@@ -11,6 +11,8 @@ namespace UserService.Infrastructure.Sql
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<UserEncryptionKeys> UserEncryptionKeys { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -18,6 +20,15 @@ namespace UserService.Infrastructure.Sql
             modelBuilder.Entity<User>().HasIndex(p => p.Email).IsUnique();
             modelBuilder.Entity<User>().Property(p => p.IsEmailVerified).IsRequired();
             modelBuilder.Entity<User>().Ignore(p => p.IsDeleted);
+
+            modelBuilder.Entity<User>()
+                .HasOne<UserEncryptionKeys>()
+                .WithOne(x => x.User)
+                .HasForeignKey<UserEncryptionKeys>(x => x.Id)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UserEncryptionKeys>().ToTable("UserEncryptionKeys").HasKey(p => p.Id);
+            modelBuilder.Entity<UserEncryptionKeys>().Property(x => x.EncryptionKey).IsRequired();
         }
     }
 }
