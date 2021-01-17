@@ -7,8 +7,8 @@ services:
       - MongoDatabaseSettings__ConnectionString=mongodb://root:example@mongo:27017
       - ConnectionStrings__UserSqlDbConnectionString=Server=sql;Database=usersdb;User Id=sa;Password=123asdQ!
     ports:
-      - "6666:80"
-      - "7777:443"
+      - "656:80"
+      - "748:443"
     depends_on:
       - mongo
       - sql

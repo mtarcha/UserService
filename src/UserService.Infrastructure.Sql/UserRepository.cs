@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using UserService.Domain.Common;
 using UserService.Domain.Entities;
+using UserService.Domain.Events;
 using UserService.Domain.Repositories;
 
 namespace UserService.Infrastructure.Sql
@@ -48,10 +49,14 @@ namespace UserService.Infrastructure.Sql
 
         public async Task SaveChangesAsync(CancellationToken token)
         {
-            foreach (var user in _dbContext.ChangeTracker.Entries<User>().Where(x => x.State != EntityState.Unchanged))
+            var updates = _dbContext.ChangeTracker.Entries<User>().Where(x => x.State != EntityState.Unchanged).ToList();
+            foreach (var user in updates)
             {
                 await _eventStore.AddEventsAsync(user.Entity.ChangeSet, token);
-                //todo check if user have to be deleted
+                if (user.Entity.IsDeleted)
+                {
+                    _dbContext.Users.Remove(user.Entity);
+                }
             }
 
             await _dbContext.SaveChangesAsync(token);

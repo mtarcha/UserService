@@ -25,8 +25,7 @@ namespace UserService.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IStorageSeeder, StorageSeeder>();
-            services.AddControllers();
-
+            
             var connectionString = Configuration.GetConnectionString("UserSqlDbConnectionString");
             services.AddDbContext<UserServiceDbContext>(cfg =>
             {
@@ -38,6 +37,8 @@ namespace UserService.Api
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddMediatR(typeof(GetUsersByEmailQuery));
+
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

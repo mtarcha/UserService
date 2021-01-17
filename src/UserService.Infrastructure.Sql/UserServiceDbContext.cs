@@ -17,6 +17,7 @@ namespace UserService.Infrastructure.Sql
             modelBuilder.Entity<User>().ToTable("Users").HasKey(p => p.Id);
             modelBuilder.Entity<User>().HasIndex(p => p.Email).IsUnique();
             modelBuilder.Entity<User>().Property(p => p.IsEmailVerified).IsRequired();
+            modelBuilder.Entity<User>().Ignore(p => p.IsDeleted);
         }
     }
 }

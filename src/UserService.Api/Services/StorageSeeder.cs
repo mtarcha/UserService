@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using UserService.Application.Commands;
@@ -20,20 +21,28 @@ namespace UserService.Api.Services
         public async Task SeedAsync(CancellationToken token)
         {
             await _sqlDbContext.Database.EnsureCreatedAsync(token);
-            await _mediator.Send(new CreateUserCommand
-            {
-                Email = "test@test.com"
-            }, token);
 
-            await _mediator.Send(new CreateUserCommand
+            try
             {
-                Email = "test+123@test.com"
-            }, token);
+                await _mediator.Send(new CreateUserCommand
+                {
+                    Email = "test@test.com"
+                }, token);
 
-            await _mediator.Send(new CreateUserCommand
+                await _mediator.Send(new CreateUserCommand
+                {
+                    Email = "test+123@test.com"
+                }, token);
+
+                await _mediator.Send(new CreateUserCommand
+                {
+                    Email = "random@random.com"
+                }, token);
+            }
+            catch (Exception e)
             {
-                Email = "random@random.com"
-            }, token);
+                Console.WriteLine(e);
+            }
         }
     }
 }

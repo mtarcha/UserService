@@ -32,6 +32,8 @@ namespace UserService.Domain.Entities
 
         public bool IsEmailVerified { get; private set; }
 
+        public bool IsDeleted { get; private set; }
+
         public IReadOnlyCollection<IEvent<Guid>> ChangeSet => _changeSet;
 
         public void ChangeEmail(string newEmail)
@@ -50,6 +52,7 @@ namespace UserService.Domain.Entities
         public void Delete()
         {
             _changeSet.Add(new DeleteUserRequestEvent(Id));
+            IsDeleted = true;
         }
     }
 }

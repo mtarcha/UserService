@@ -7,7 +7,7 @@ namespace UserService.Api.Controllers
 {
     [ApiController]
     [Route("api/users")]
-    public class UsersController : Controller
+    public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
 
@@ -19,9 +19,6 @@ namespace UserService.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery(Name = "emailPart")] string emailPart)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var query = new GetUsersByEmailQuery
             {
                 EmailPart = emailPart
