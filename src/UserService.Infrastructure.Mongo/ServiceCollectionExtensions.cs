@@ -16,33 +16,7 @@ namespace UserService.Infrastructure.Mongo
 
             services.AddScoped<IEventStore<Guid>, EventStore>();
 
-            BsonClassMap.RegisterClassMap<Event>(cm =>
-            {
-                cm.AutoMap();
-                cm.SetIsRootClass(true);
-                cm.AddKnownType(typeof(ChangeEmailRequestEmail));
-                cm.AddKnownType(typeof(CreateUserRequestEvent));
-                cm.AddKnownType(typeof(DeleteUserRequestEvent));
-                cm.AddKnownType(typeof(UserEmailVerifiedEvent));
-                cm.SetIgnoreExtraElements(true);
-            });
-
-            BsonClassMap.RegisterClassMap<ChangeEmailRequestEmail>(cm =>
-            {
-                cm.AutoMap();
-                cm.SetIgnoreExtraElements(true);
-            });
-            BsonClassMap.RegisterClassMap<CreateUserRequestEvent>(cm =>
-            {
-                cm.AutoMap();
-                cm.SetIgnoreExtraElements(true);
-            });
-            BsonClassMap.RegisterClassMap<DeleteUserRequestEvent>(cm =>
-            {
-                cm.AutoMap();
-                cm.SetIgnoreExtraElements(true);
-            });
-            BsonClassMap.RegisterClassMap<UserEmailVerifiedEvent>(cm =>
+            BsonClassMap.RegisterClassMap<EncryptedEvent<Guid>>(cm =>
             {
                 cm.AutoMap();
                 cm.SetIgnoreExtraElements(true);
