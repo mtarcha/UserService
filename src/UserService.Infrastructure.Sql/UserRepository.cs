@@ -48,7 +48,7 @@ namespace UserService.Infrastructure.Sql
 
         public async Task SaveChangesAsync(CancellationToken token)
         {
-            var updates = _dbContext.ChangeTracker.Entries<User>().Where(x => x.State != EntityState.Unchanged).ToList();
+            var updates = _dbContext.ChangeTracker.Entries<User>().ToList();
             foreach (var user in updates)
             {
                 await _eventStore.AddEventsAsync(user.Entity.ChangeSet, token);

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UserService.Application.Commands;
@@ -36,6 +37,19 @@ namespace UserService.Api.Controllers
             var command = new CreateUserCommand
             {
                 Email = email
+            };
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUser(Guid userId)
+        {
+            var command = new DeleteUserCommand
+            {
+                UserId = userId
             };
 
             var result = await _mediator.Send(command);
