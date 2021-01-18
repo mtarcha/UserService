@@ -1,12 +1,11 @@
 ﻿using System;
-using UserService.Domain.Common;
 
 namespace UserService.Domain.Events
 {
     public class ChangeEmailRequestEmail : Event
     {
-        public ChangeEmailRequestEmail(Guid aggregatorId, string newEmail) 
-            : base(aggregatorId)
+        public ChangeEmailRequestEmail(Guid aggregateRootId, string newEmail) 
+            : base(aggregateRootId)
         {
             NewEmail = newEmail;
         }

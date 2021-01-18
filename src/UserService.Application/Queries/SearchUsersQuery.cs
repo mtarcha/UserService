@@ -4,8 +4,8 @@ using UserService.Domain.Entities;
 
 namespace UserService.Application.Queries
 {
-    public class GetUsersByEmailQuery : IRequest<IEnumerable<User>>
+    public class SearchUsersQuery : IRequest<IEnumerable<User>>
     {
-        public string EmailPart { get; set; }
+        public string Email { get; set; }
     }
 }

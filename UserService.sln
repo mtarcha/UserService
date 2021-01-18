@@ -15,7 +15,9 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService.Infrastructure.Sql", "src\UserService.Infrastructure.Sql\UserService.Infrastructure.Sql.csproj", "{561E2E4E-014D-4A65-A8BC-8841CA7898BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Infrastructure.Mongo", "src\UserService.Infrastructure.Mongo\UserService.Infrastructure.Mongo.csproj", "{A513379E-C245-446A-84F1-4DFE13D31B55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService.Infrastructure.Mongo", "src\UserService.Infrastructure.Mongo\UserService.Infrastructure.Mongo.csproj", "{A513379E-C245-446A-84F1-4DFE13D31B55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Infrastructure.EventSourcing", "src\UserService.Infrastructure.EventSourcing\UserService.Infrastructure.EventSourcing.csproj", "{605FBFB2-D8B0-4998-AC6E-23358C7C17AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{A513379E-C245-446A-84F1-4DFE13D31B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A513379E-C245-446A-84F1-4DFE13D31B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A513379E-C245-446A-84F1-4DFE13D31B55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{605FBFB2-D8B0-4998-AC6E-23358C7C17AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{605FBFB2-D8B0-4998-AC6E-23358C7C17AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{605FBFB2-D8B0-4998-AC6E-23358C7C17AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{605FBFB2-D8B0-4998-AC6E-23358C7C17AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

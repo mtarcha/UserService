@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson.Serialization;
-using UserService.Domain.Common;
-using UserService.Domain.Events;
+using System;
+using UserService.Infrastructure.EventSourcing;
 
 namespace UserService.Infrastructure.Mongo
 {

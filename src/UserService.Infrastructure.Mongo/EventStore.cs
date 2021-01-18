@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using UserService.Domain.Common;
 using UserService.Domain.Events;
+using UserService.Infrastructure.EventSourcing;
 
 namespace UserService.Infrastructure.Mongo
 {
@@ -41,7 +42,7 @@ namespace UserService.Infrastructure.Mongo
 
         public async Task<IReadOnlyCollection<IEvent<Guid>>> GetEventsAsync(Guid aggregateId, CancellationToken token)
         {
-            var filter = new FilterDefinitionBuilder<EncryptedEvent<Guid>>().Eq(nameof(Event.AggregatorId), aggregateId);
+            var filter = new FilterDefinitionBuilder<EncryptedEvent<Guid>>().Eq(nameof(Event.AggregateRootId), aggregateId);
             var encryptedEvents = await _mongoCollection.Find(filter).ToListAsync(token);
 
             var decryptedEvents = new List<IEvent<Guid>>();

@@ -5,7 +5,7 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>83f6fa31-c1b7-4090-b43a-5677c2c5f3b3</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/api/users?emailPart=test</DockerServiceUrl>
+    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/api/users?email=test</DockerServiceUrl>
     <DockerServiceName>userservice.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

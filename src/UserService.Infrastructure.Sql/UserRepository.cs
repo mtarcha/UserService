@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using UserService.Domain.Common;
 using UserService.Domain.Entities;
-using UserService.Domain.Events;
 using UserService.Domain.Repositories;
+using UserService.Infrastructure.EventSourcing;
 
 namespace UserService.Infrastructure.Sql
 {
@@ -37,14 +36,14 @@ namespace UserService.Infrastructure.Sql
             return user.Id;
         }
 
-        public async Task<User> GetUserByIdAsync(Guid userId, CancellationToken token)
+        public async Task<IReadOnlyCollection<User>> FindUsersAsync(string email, CancellationToken token)
         {
-            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == userId, token);
+            return await _dbContext.Users.Where(x => EF.Functions.Like(x.Email, $"%{email}%")).ToListAsync(token);
         }
 
-        public async Task<IReadOnlyCollection<User>> GetUsersByEmailPartAsync(string emailPart, CancellationToken token)
+        public async Task<User> GetByIdAsync(Guid id, CancellationToken token)
         {
-            return await _dbContext.Users.Where(x => EF.Functions.Like(x.Email, $"%{emailPart}%")).ToListAsync(token);
+            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id, token);
         }
 
         public async Task SaveChangesAsync(CancellationToken token)

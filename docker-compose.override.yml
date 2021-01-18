@@ -3,22 +3,22 @@ version: '3.4'
 services:
   userservice.api:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - MongoDatabaseSettings__ConnectionString=mongodb://root:example@mongo:27017
-      - ConnectionStrings__UserSqlDbConnectionString=Server=sql;Database=usersdb;User Id=sa;Password=123asdQ!
+      ASPNETCORE_ENVIRONMENT: Development
+      MongoDatabaseSettings__ConnectionString: mongodb://root:example@mongo:27017
+      ConnectionStrings__UserSqlDbConnectionString: Server=sql;Database=usersdb;User Id=sa;Password=123asdQ!
     ports:
-      - "656:80"
-      - "748:443"
+      - 656:80
+      - 748:443
     depends_on:
       - mongo
       - sql
   sql:
     image: microsoft/mssql-server-linux:latest
     environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=123asdQ!
+      ACCEPT_EULA: Y
+      SA_PASSWORD: 123asdQ!
     ports:
-      - "5433:1433"  
+      - 5433:1433 
   mongo:
     image: mongo
     restart: always
@@ -28,7 +28,6 @@ services:
       MONGO_INITDB_DATABASE: UserEvents
     ports:
       - 27017:27017
-
   mongo.express:
     image: mongo-express
     restart: always

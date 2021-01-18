@@ -5,13 +5,13 @@ namespace UserService.Domain.Events
 {
     public class Event : IEvent<Guid>
     {
-        public Event(Guid aggregatorId)
+        public Event(Guid aggregateRootId)
         {
-            AggregatorId = aggregatorId;
+            AggregateRootId = aggregateRootId;
             Timestamp = DateTime.UtcNow;
         }
 
-        public Guid AggregatorId { get; private set; }
+        public Guid AggregateRootId { get; private set; }
         public DateTime Timestamp { get; private set; }
     }
 }

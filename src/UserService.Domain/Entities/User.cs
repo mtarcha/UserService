@@ -5,7 +5,7 @@ using UserService.Domain.Events;
 
 namespace UserService.Domain.Entities
 {
-    public class User : IAggregate<Guid>
+    public class User : IAggregateRoot<Guid>
     {
         private readonly List<IEvent<Guid>> _changeSet;
 

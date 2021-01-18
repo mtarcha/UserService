@@ -4,7 +4,7 @@ namespace UserService.Domain.Common
 {
     public interface IEvent<out TKey>
     {
-        TKey AggregatorId { get; }
+        TKey AggregateRootId { get; }
 
         DateTime Timestamp { get; }
     }

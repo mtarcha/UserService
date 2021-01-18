@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using UserService.Domain.Common;
+using UserService.Infrastructure.EventSourcing;
 
 namespace UserService.Infrastructure.Sql
 {
@@ -15,7 +15,7 @@ namespace UserService.Infrastructure.Sql
             _dbContext = dbContext;
         }
 
-        public async Task<string> GetEncryptionKeyAsync(Guid aggregateId, CancellationToken token)
+        public async Task<string> GetOrCreateEncryptionKeyAsync(Guid aggregateId, CancellationToken token)
         {
             var userKey = await _dbContext.UserEncryptionKeys.FirstOrDefaultAsync(x => x.Id == aggregateId, token);
             if (userKey == null)

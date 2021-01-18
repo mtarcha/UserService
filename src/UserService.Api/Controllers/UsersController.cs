@@ -17,11 +17,11 @@ namespace UserService.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery(Name = "emailPart")] string emailPart)
+        public async Task<IActionResult> Get([FromQuery(Name = "email")] string email)
         {
-            var query = new GetUsersByEmailQuery
+            var query = new SearchUsersQuery
             {
-                EmailPart = emailPart
+                Email = email
             };
 
             var result = await _mediator.Send(query);

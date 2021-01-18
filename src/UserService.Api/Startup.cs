@@ -1,4 +1,3 @@
-using System;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,10 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using UserService.Api.Services;
 using UserService.Application.Queries;
-using UserService.Domain.Common;
 using UserService.Domain.Repositories;
+using UserService.Infrastructure.EventSourcing;
 using UserService.Infrastructure.Mongo;
 using UserService.Infrastructure.Sql;
 
@@ -41,9 +41,11 @@ namespace UserService.Api
 
             services.AddScoped<IUserRepository, UserRepository>();
 
-            services.AddMediatR(typeof(GetUsersByEmailQuery));
+            services.AddMediatR(typeof(SearchUsersQuery));
 
             services.AddControllers();
+
+            // todo: add swagger
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

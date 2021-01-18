@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\UserService.Domain.Common\UserService.Domain.Common.csproj" />
     <ProjectReference Include="..\UserService.Domain\UserService.Domain.csproj" />
+    <ProjectReference Include="..\UserService.Infrastructure.EventSourcing\UserService.Infrastructure.EventSourcing.csproj" />
   </ItemGroup>
 
 </Project>

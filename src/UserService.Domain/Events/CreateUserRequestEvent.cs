@@ -1,12 +1,11 @@
 ﻿using System;
-using UserService.Domain.Common;
 
 namespace UserService.Domain.Events
 {
     public class CreateUserRequestEvent : Event
     {
-        public CreateUserRequestEvent(Guid userId, string email)
-            : base(userId)
+        public CreateUserRequestEvent(Guid aggregateRootId, string email)
+            : base(aggregateRootId)
         {
             Email = email;
         }

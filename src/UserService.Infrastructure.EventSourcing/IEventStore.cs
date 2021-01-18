@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using UserService.Domain.Common;
 
-namespace UserService.Domain.Common
+namespace UserService.Infrastructure.EventSourcing
 {
     public interface IEventStore<TKey>
     {
