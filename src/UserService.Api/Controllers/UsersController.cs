@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using UserService.Application.Commands;
 using UserService.Application.Queries;
 
 namespace UserService.Api.Controllers
@@ -25,6 +26,19 @@ namespace UserService.Api.Controllers
             };
 
             var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser(string email)
+        {
+            var command = new CreateUserCommand
+            {
+                Email = email
+            };
+
+            var result = await _mediator.Send(command);
 
             return Ok(result);
         }

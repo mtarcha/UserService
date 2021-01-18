@@ -21,28 +21,6 @@ namespace UserService.Api.Services
         public async Task SeedAsync(CancellationToken token)
         {
             await _sqlDbContext.Database.EnsureCreatedAsync(token);
-
-            try
-            {
-                await _mediator.Send(new CreateUserCommand
-                {
-                    Email = "test@test.com"
-                }, token);
-
-                await _mediator.Send(new CreateUserCommand
-                {
-                    Email = "test+123@test.com"
-                }, token);
-
-                await _mediator.Send(new CreateUserCommand
-                {
-                    Email = "random@random.com"
-                }, token);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
         }
     }
 }
