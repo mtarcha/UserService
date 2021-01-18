@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Swashbuckle.AspNetCore.Swagger;
 using UserService.Api.Services;
 using UserService.Application.Queries;
 using UserService.Domain.Repositories;
@@ -45,8 +46,9 @@ namespace UserService.Api
 
             services.AddControllers();
 
-            // todo: add swagger
+            services.AddSwaggerGen();
         }
+    
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -56,6 +58,12 @@ namespace UserService.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "User Service API V1");
+            });
 
             app.UseRouting();
 

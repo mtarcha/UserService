@@ -3,8 +3,15 @@
 ## Prerequisites
 * docker 
 * docker-compose
-* .NET Core SDK 2.2.0
+* .NET Core SDK 3.1.0
 
+## How to run
+* Set docker-compose project as StartUp project
+* Run in your IDE
+
+## UI
+* Swagger: http://localhost:656/swagger/index.html
+* MongoDB: http://localhost:8081/
 
 # What was used
 ## Tech Stack:
@@ -12,9 +19,9 @@
 * Docker
 * Docker Compose
 * MediatR
-* NUnit
-* Moq
 * Swagger
+* MSSql
+* MongoDb
 
 ## Principles:
 * SOLID
