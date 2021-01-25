@@ -17,7 +17,7 @@ namespace UserService.Application.Commands
 
         public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var id = await _repository.CreateUserAsync(request.Email, cancellationToken);
+            var id = await _repository.CreateUserAsync(request.Email, cancellationToken).ConfigureAwait(false);
             await _repository.SaveChangesAsync(cancellationToken);
 
             return id;

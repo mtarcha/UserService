@@ -6,6 +6,6 @@ namespace UserService.Domain.Common
     {
         TKey AggregateRootId { get; }
 
-        DateTime Timestamp { get; }
+        DateTimeOffset Timestamp { get; }
     }
 }

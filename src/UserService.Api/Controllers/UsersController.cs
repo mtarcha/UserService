@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -19,40 +20,40 @@ namespace UserService.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery(Name = "email")] string email)
+        public async Task<IActionResult> Get([FromQuery(Name = "email")] string email, CancellationToken token)
         {
             var query = new SearchUsersQuery
             {
                 Email = email
             };
 
-            var result = await _mediator.Send(query);
+            var result = await _mediator.Send(query, token).ConfigureAwait(false);
 
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser(string email)
+        public async Task<IActionResult> CreateUser(string email, CancellationToken token)
         {
             var command = new CreateUserCommand
             {
                 Email = email
             };
 
-            var result = await _mediator.Send(command);
+            var result = await _mediator.Send(command, token).ConfigureAwait(false);
 
             return Ok(result);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteUser(Guid userId)
+        public async Task<IActionResult> DeleteUser(Guid userId, CancellationToken token)
         {
             var command = new DeleteUserCommand
             {
                 UserId = userId
             };
 
-            var result = await _mediator.Send(command);
+            var result = await _mediator.Send(command, token).ConfigureAwait(false);
 
             return Ok(result);
         }

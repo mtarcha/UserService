@@ -12,6 +12,6 @@ namespace UserService.Domain.Events
         }
 
         public Guid AggregateRootId { get; private set; }
-        public DateTime Timestamp { get; private set; }
+        public DateTimeOffset Timestamp { get; private set; }
     }
 }

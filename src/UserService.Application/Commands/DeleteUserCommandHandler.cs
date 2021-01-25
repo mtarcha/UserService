@@ -16,7 +16,7 @@ namespace UserService.Application.Commands
 
         public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            var user = await _repository.GetByIdAsync(request.UserId, cancellationToken);
+            var user = await _repository.GetByIdAsync(request.UserId, cancellationToken).ConfigureAwait(false);
             user.Delete();
             await _repository.SaveChangesAsync(cancellationToken);
 
