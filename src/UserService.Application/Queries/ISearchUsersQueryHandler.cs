@@ -4,8 +4,8 @@ using UserService.Domain.Entities;
 
 namespace UserService.Application.Queries
 {
-    public class SearchUsersQuery : IRequest<IEnumerable<UserViewModel>>
+    public interface ISearchUsersQueryHandler : IRequestHandler<SearchUsersQuery, IEnumerable<UserViewModel>>
     {
-        public string Email { get; set; }
+        
     }
 }

@@ -8,6 +8,6 @@ namespace UserService.Domain.Common
     {
         Task<TAggregateRoot> GetByIdAsync(TId id, CancellationToken token);
 
-        Task SaveChangesAsync(CancellationToken token);
+        Task SaveChangesAsync(TAggregateRoot aggregate, CancellationToken token);
     }
 }

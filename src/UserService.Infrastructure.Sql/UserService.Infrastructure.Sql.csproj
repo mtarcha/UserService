@@ -5,13 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.11" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UserService.Domain.Common\UserService.Domain.Common.csproj" />
-    <ProjectReference Include="..\UserService.Domain\UserService.Domain.csproj" />
+    <ProjectReference Include="..\UserService.Application\UserService.Application.csproj" />
     <ProjectReference Include="..\UserService.Infrastructure.EventSourcing\UserService.Infrastructure.EventSourcing.csproj" />
   </ItemGroup>
 

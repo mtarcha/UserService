@@ -1,7 +1,6 @@
 ﻿using System;
-using UserService.Domain.Entities;
 
-namespace UserService.Infrastructure.Sql
+namespace UserService.Infrastructure.Sql.Entities
 {
     public class UserEncryptionKeys
     {

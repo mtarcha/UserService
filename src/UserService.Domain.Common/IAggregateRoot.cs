@@ -6,6 +6,6 @@ namespace UserService.Domain.Common
     {
         TId Id { get; }
 
-        IReadOnlyCollection<IEvent<TId>> ChangeSet { get; }
+        IReadOnlyCollection<IEvent<TId>> UncommittedChanges { get; }
     }
 }

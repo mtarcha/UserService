@@ -9,6 +9,6 @@ namespace UserService.Infrastructure.EventSourcing
     {
         Task AddEventsAsync(IEnumerable<IEvent<TKey>> events, CancellationToken token);
 
-        Task<IReadOnlyCollection<IEvent<TKey>>> GetEventsAsync(TKey aggregateId, CancellationToken token);
+        Task<IReadOnlyList<IEvent<TKey>>> GetEventsAsync(TKey aggregateId, CancellationToken token);
     }
 }

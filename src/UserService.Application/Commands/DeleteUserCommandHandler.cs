@@ -18,7 +18,7 @@ namespace UserService.Application.Commands
         {
             var user = await _repository.GetByIdAsync(request.UserId, cancellationToken).ConfigureAwait(false);
             user.Delete();
-            await _repository.SaveChangesAsync(cancellationToken);
+            await _repository.SaveChangesAsync(user, cancellationToken);
 
             return Unit.Value;
         }

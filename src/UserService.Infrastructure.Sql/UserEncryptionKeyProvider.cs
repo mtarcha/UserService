@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using UserService.Infrastructure.EventSourcing;
+using UserService.Infrastructure.Sql.Entities;
 
 namespace UserService.Infrastructure.Sql
 {

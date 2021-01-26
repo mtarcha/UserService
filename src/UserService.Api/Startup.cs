@@ -8,11 +8,13 @@ using Microsoft.Extensions.Hosting;
 using System;
 using Swashbuckle.AspNetCore.Swagger;
 using UserService.Api.Services;
+using UserService.Application.Commands;
 using UserService.Application.Queries;
 using UserService.Domain.Repositories;
 using UserService.Infrastructure.EventSourcing;
 using UserService.Infrastructure.Mongo;
 using UserService.Infrastructure.Sql;
+using UserService.Infrastructure.Sql.Handlers;
 
 namespace UserService.Api
 {
@@ -42,7 +44,7 @@ namespace UserService.Api
 
             services.AddScoped<IUserRepository, UserRepository>();
 
-            services.AddMediatR(typeof(SearchUsersQuery));
+            services.AddMediatR(typeof(CreateUserCommand), typeof(SearchUsersQueryHandler));
 
             services.AddControllers();
 

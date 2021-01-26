@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using UserService.Domain.Common;
@@ -14,9 +15,10 @@ namespace UserService.Infrastructure.Mongo
     public class EventStore : IEventStore<Guid>
     {
         private readonly IEncryptionService<Guid> _encryptionService;
+        private readonly IMediator _mediator;
         private readonly IMongoCollection<EncryptedEvent<Guid>> _mongoCollection;
 
-        public EventStore(IOptions<MongoDatabaseSettings> options, IEncryptionService<Guid> encryptionService)
+        public EventStore(IOptions<MongoDatabaseSettings> options, IEncryptionService<Guid> encryptionService, IMediator mediator)
         {
             var settings = options.Value;
 
@@ -26,6 +28,7 @@ namespace UserService.Infrastructure.Mongo
             _mongoCollection = database.GetCollection<EncryptedEvent<Guid>>(settings.CollectionName);
 
             _encryptionService = encryptionService;
+            _mediator = mediator;
         }
 
         public async Task AddEventsAsync(IEnumerable<IEvent<Guid>> events, CancellationToken token)
@@ -38,9 +41,14 @@ namespace UserService.Infrastructure.Mongo
             }
 
             await _mongoCollection.InsertManyAsync(encryptedEvents, cancellationToken: token);
+
+            foreach (var @event in events.OrderByDescending(x => x.Timestamp))
+            {
+                await _mediator.Publish(@event, token);
+            }
         }
 
-        public async Task<IReadOnlyCollection<IEvent<Guid>>> GetEventsAsync(Guid aggregateId, CancellationToken token)
+        public async Task<IReadOnlyList<IEvent<Guid>>> GetEventsAsync(Guid aggregateId, CancellationToken token)
         {
             var filter = new FilterDefinitionBuilder<EncryptedEvent<Guid>>().Eq(nameof(Event.AggregateRootId), aggregateId);
             var encryptedEvents = await _mongoCollection.Find(filter).ToListAsync(token);

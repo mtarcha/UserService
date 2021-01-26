@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using UserService.Domain.Entities;
 using UserService.Domain.Repositories;
 
 namespace UserService.Application.Commands
@@ -17,10 +18,10 @@ namespace UserService.Application.Commands
 
         public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var id = await _repository.CreateUserAsync(request.Email, cancellationToken).ConfigureAwait(false);
-            await _repository.SaveChangesAsync(cancellationToken);
+            var user = new User(request.Email);
+            await _repository.SaveChangesAsync(user, cancellationToken).ConfigureAwait(false);
 
-            return id;
+            return user.Id;
         }
     }
 }

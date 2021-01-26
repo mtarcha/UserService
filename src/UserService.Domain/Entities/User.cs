@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UserService.Domain.Common;
 using UserService.Domain.Events;
 
@@ -7,11 +8,31 @@ namespace UserService.Domain.Entities
 {
     public class User : IAggregateRoot<Guid>
     {
-        private readonly List<IEvent<Guid>> _changeSet;
+        private readonly List<IEvent<Guid>> _uncommittedChanges;
 
-        public User()
+        public User(IEnumerable<IEvent<Guid>> changeSet)
         {
-            _changeSet = new List<IEvent<Guid>>();
+            _uncommittedChanges = new List<IEvent<Guid>>();
+            foreach (var @event in changeSet.OrderByDescending(x => x.Timestamp))
+            {
+                switch (@event)
+                {
+                    case CreateUserRequestEvent createUserRequestEvent:
+                        Id = @event.AggregateRootId;
+                        Email = createUserRequestEvent.Email; ;
+                        break;
+                    case ChangeEmailRequestEmail changeEmailRequestEmail:
+                        Email = changeEmailRequestEmail.NewEmail;
+                        break;
+                    case UserEmailVerifiedEvent userEmailVerifiedEvent:
+                        IsEmailVerified = true;
+                        break;
+                    case DeleteUserRequestEvent deleteUserRequestEvent:
+                        throw new Exception($"User with Id {deleteUserRequestEvent.AggregateRootId} was deleted. Cannot return any data.");
+                    default:
+                        throw new NotSupportedException($"Event type {@event.GetType()} is not supported for user.");
+                }
+            }
         }
 
         public User(string email)
@@ -20,7 +41,7 @@ namespace UserService.Domain.Entities
             Email = email;
             IsEmailVerified = false;
 
-            _changeSet = new List<IEvent<Guid>>
+            _uncommittedChanges = new List<IEvent<Guid>>
             {
                 new CreateUserRequestEvent(Id, email),
             };
@@ -32,27 +53,24 @@ namespace UserService.Domain.Entities
 
         public bool IsEmailVerified { get; private set; }
 
-        public bool IsDeleted { get; private set; }
-
-        public IReadOnlyCollection<IEvent<Guid>> ChangeSet => _changeSet;
+        public IReadOnlyCollection<IEvent<Guid>> UncommittedChanges => _uncommittedChanges;
 
         public void ChangeEmail(string newEmail)
         {
-            _changeSet.Add(new ChangeEmailRequestEmail(Id, newEmail));
+            _uncommittedChanges.Add(new ChangeEmailRequestEmail(Id, newEmail));
             Email = newEmail;
             IsEmailVerified = false;
         }
 
         public void SetEmailVerified()
         {
-            _changeSet.Add(new UserEmailVerifiedEvent(Id));
+            _uncommittedChanges.Add(new UserEmailVerifiedEvent(Id));
             IsEmailVerified = true;
         }
 
         public void Delete()
         {
-            _changeSet.Add(new DeleteUserRequestEvent(Id));
-            IsDeleted = true;
+            _uncommittedChanges.Add(new DeleteUserRequestEvent(Id));
         }
     }
 }

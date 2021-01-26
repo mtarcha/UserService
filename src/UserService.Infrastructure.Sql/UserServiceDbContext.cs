@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UserService.Domain.Entities;
+using UserService.Infrastructure.Sql.Entities;
+using User = UserService.Infrastructure.Sql.Entities.User;
 
 namespace UserService.Infrastructure.Sql
 {
@@ -19,7 +21,7 @@ namespace UserService.Infrastructure.Sql
             modelBuilder.Entity<User>().ToTable("Users").HasKey(p => p.Id);
             modelBuilder.Entity<User>().HasIndex(p => p.Email).IsUnique();
             modelBuilder.Entity<User>().Property(p => p.IsEmailVerified).IsRequired();
-            modelBuilder.Entity<User>().Ignore(p => p.IsDeleted);
+            modelBuilder.Entity<User>().Property(p => p.UpdatedAt).IsRequired();
 
             modelBuilder.Entity<User>()
                 .HasOne<UserEncryptionKeys>()
