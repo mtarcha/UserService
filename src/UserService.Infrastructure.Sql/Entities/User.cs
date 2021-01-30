@@ -11,5 +11,7 @@ namespace UserService.Infrastructure.Sql.Entities
         public bool IsEmailVerified { get; set; }
 
         public DateTimeOffset UpdatedAt { get; set; }
+
+        public Guid? EncryptionKeyId { get; set; }
     }
 }

@@ -44,7 +44,7 @@ namespace UserService.Api
 
             services.AddScoped<IUserRepository, UserRepository>();
 
-            services.AddMediatR(typeof(CreateUserCommand), typeof(SearchUsersQueryHandler));
+            services.AddMediatR(typeof(CreateUserCommand), typeof(UserCreatedEventHandler));
 
             services.AddControllers();
 

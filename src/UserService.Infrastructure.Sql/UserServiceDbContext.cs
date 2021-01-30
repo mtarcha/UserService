@@ -26,7 +26,7 @@ namespace UserService.Infrastructure.Sql
             modelBuilder.Entity<User>()
                 .HasOne<UserEncryptionKeys>()
                 .WithOne(x => x.User)
-                .HasForeignKey<UserEncryptionKeys>(x => x.Id)
+                .HasForeignKey<User>(x => x.EncryptionKeyId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<UserEncryptionKeys>().ToTable("UserEncryptionKeys").HasKey(p => p.Id);

@@ -6,7 +6,7 @@ using UserService.Domain.Events;
 
 namespace UserService.Infrastructure.Sql.Handlers
 {
-    public class EmailChangedEventHandler : IRequestHandler<ChangeEmailRequestEmail>
+    public class EmailChangedEventHandler : INotificationHandler<ChangeEmailRequestEmail>
     {
         private readonly UserServiceDbContext _dbContext;
 
@@ -15,7 +15,7 @@ namespace UserService.Infrastructure.Sql.Handlers
             _dbContext = dbContext;
         }
 
-        public async Task<Unit> Handle(ChangeEmailRequestEmail request, CancellationToken cancellationToken)
+        public async Task Handle(ChangeEmailRequestEmail request, CancellationToken cancellationToken)
         {
             var user = await _dbContext.Users
                 .SingleOrDefaultAsync(x => x.Id == request.AggregateRootId, cancellationToken)
@@ -23,8 +23,6 @@ namespace UserService.Infrastructure.Sql.Handlers
 
             user.Email = request.NewEmail;
             await _dbContext.SaveChangesAsync(cancellationToken);
-
-            return Unit.Value;
         }
     }
 }
